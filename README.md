@@ -1,5 +1,9 @@
 # vue-coingeckoapi
 
+[Crypto Api](https://www.coingecko.com/es/api/documentation)\
+[Web Consumiendo la Api](https://fervent-gates-b47ff7.netlify.app/)\
+[Mi Web Personal](erickdeveloper.herokuapp.com)
+
 ## Project setup
 ```
 npm install
