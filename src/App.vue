@@ -1,26 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home">
+    <h1 class="text-center mt-5">Vue Crypto</h1>
+    <Crypto :datos="arrayCrypto"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// @ is an alias to /src
+import Crypto from './components/Crypto'
 
 export default {
-  name: 'App',
+  name: 'Home',
+  data(){
+    return{
+      arrayCrypto: []
+    }
+  },
   components: {
-    HelloWorld
+    Crypto,
+  },
+  methods: {
+    async consumirApi(){
+      try{
+        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+
+        const data = await res.json()
+
+        this.arrayCrypto = data
+
+        console.log(data)
+      }catch(error){
+        console.log(error)
+      }
+    }
+  },
+  created(){
+    this.consumirApi();
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
